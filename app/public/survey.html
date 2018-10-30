@@ -8,8 +8,7 @@
 
     <!-- <script type="module" src="friends.js"></script> -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <title>Survey</title>
 </head>
@@ -164,7 +163,26 @@
             </select>
             <br>
             <br>
-            <button id="newButton" type="submit" class="btn btn-primary mb-3" style="width: 100%">Submit</button>
+            <button id="newButton" type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal" style="width: 100%">Submit</button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Best Match</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="modalText"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
 
         <hr>
@@ -176,13 +194,15 @@
     </div>
 
     <script>
-
-
         function add(a, b) {
-            return a + b;
+            return a - b;
         }
 
-        $("#newButton").on("click", function (event) {
+        Array.min = function(array) {
+            return Math.min.apply(Math, array);
+        };
+
+        $("#newButton").on("click", function(event) {
             event.preventDefault();
 
             var scoresArr = [$("#q1").val().trim(), $("#q2").val().trim(), $("#q3").val().trim(), $("#q4").val().trim(), $("#q5").val().trim(), $("#q6").val().trim(), $("#q7").val().trim(), $("#q8").val().trim(), $("#q9").val().trim(), $("#q10").val().trim()];
@@ -196,9 +216,8 @@
             $.ajax("/api/friends", {
                 type: "POST",
                 data: newPatron
-            }).then(function (data) {
+            }).then(function(data) {
 
-                console.log("ok");
                 // data is an array with all objects
                 console.log(data);
 
@@ -208,24 +227,42 @@
                 // this goes through each user one by one with new user at the end
                 var comparePats = [];
                 var comparisonScores = [];
-                var addArray = [];
+
                 data.forEach(pat => {
-                    if (!(pat.name === newPatron.name) && !(pat.photo === newPatron.photo)) {
-                        // comparePats.push(pat);
-                        for (var i = 0; i < data.length - 1; i++) {
+
+                        if (!(pat.name === newPatron.name) && !(pat.photo === newPatron.photo)) {
+                            console.log(pat.scores);
+                            var addArray = [];
                             for (var x = 0; x < 10; x++) {
                                 addArray.push(newPatron.scores[x] - pat.scores[x]);
-
                             }
+
+                            // addArray should be made data -1 times
                             console.log(addArray);
                             var sum = addArray.reduce(add, 0);
                             comparisonScores.push(sum);
                         }
-                    }
-                })
-                // console.log(comparePats);
+                    })
+                    // comparisonScores should be the length of data - 1
                 console.log(comparisonScores);
+                console.log(comparisonScores.length);
 
+                // var getMatch;
+                var absCompare = [];
+                comparisonScores.forEach(score => {
+                    absCompare.push(Math.abs(score))
+                })
+                console.log(absCompare);
+                var minimum = Array.min(absCompare);
+                console.log(minimum);
+
+                var getIndex = absCompare.indexOf(minimum);
+                console.log(getIndex);
+                var getUserObj = data[minimum];
+                console.log(data[minimum]);
+                var getUserName = getUserObj.name;
+                console.log(getUserName);
+                $("#modalText").append(getUserName);
 
             })
         });
