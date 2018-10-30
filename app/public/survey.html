@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- <script type="module" src="friends.js"></script> -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 
     <title>Survey</title>
 </head>
@@ -18,7 +20,9 @@
             <h2>Survey Questions</h2>
             <hr>
             <div class="form-group">
-                <h3><strong>About You</strong></h3>
+                <h3>
+                    <strong>About You</strong>
+                </h3>
                 <h4>Name (Required)</h4>
                 <input id="name" type="text" class="form-control" required="">
             </div>
@@ -29,7 +33,9 @@
             </div>
             <hr>
 
-            <h3><strong>Question 1</strong></h3>
+            <h3>
+                <strong>Question 1</strong>
+            </h3>
             <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
             <select id="q1" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -40,7 +46,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 2</strong></h3>
+            <h3>
+                <strong>Question 2</strong>
+            </h3>
             <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
             <select id="q2" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -51,7 +59,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 3</strong></h3>
+            <h3>
+                <strong>Question 3</strong>
+            </h3>
             <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
             <select id="q3" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -62,7 +72,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 4</strong></h3>
+            <h3>
+                <strong>Question 4</strong>
+            </h3>
             <h4>You rarely do something just out of sheer curiosity.</h4>
             <select id="q4" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -73,7 +85,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 5</strong></h3>
+            <h3>
+                <strong>Question 5</strong>
+            </h3>
             <h4>People can rarely upset you.</h4>
             <select id="q5" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -84,7 +98,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 6</strong></h3>
+            <h3>
+                <strong>Question 6</strong>
+            </h3>
             <h4>It is often difficult for you to relate to other people's feelings.</h4>
             <select id="q6" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -95,7 +111,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 7</strong></h3>
+            <h3>
+                <strong>Question 7</strong>
+            </h3>
             <h4>In a discussion, truth should be more important than people's sensitivities.</h4>
             <select id="q7" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -106,7 +124,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 8</strong></h3>
+            <h3>
+                <strong>Question 8</strong>
+            </h3>
             <h4>You rarely get carried away by fantasies and ideas.</h4>
             <select id="q8" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -117,7 +137,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 9</strong></h3>
+            <h3>
+                <strong>Question 9</strong>
+            </h3>
             <h4>You think that everyon's views should be respected regardless of whether they are supported by facts or not.</h4>
             <select id="q9" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -128,7 +150,9 @@
                 <option value="5">5 (Strongly Agree)</option>
             </select>
 
-            <h3><strong>Question 10</strong></h3>
+            <h3>
+                <strong>Question 10</strong>
+            </h3>
             <h4>You feel more energetic after spending time with a group of people.</h4>
             <select id="q10" class="chosen-select">
                 <option value="">Select an Option</option>
@@ -144,12 +168,21 @@
         </form>
 
         <hr>
-        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/sboleyn/friend_Finder.git">GitHub Repo</a></p>
+        <p>
+            <a href="/api/friends">API Friends List</a> |
+            <a href="https://github.com/sboleyn/friend_Finder.git">GitHub Repo</a>
+        </p>
 
     </div>
 
     <script>
-        $("#newButton").on("click", function(event) {
+
+
+        function add(a, b) {
+            return a + b;
+        }
+
+        $("#newButton").on("click", function (event) {
             event.preventDefault();
 
             var scoresArr = [$("#q1").val().trim(), $("#q2").val().trim(), $("#q3").val().trim(), $("#q4").val().trim(), $("#q5").val().trim(), $("#q6").val().trim(), $("#q7").val().trim(), $("#q8").val().trim(), $("#q9").val().trim(), $("#q10").val().trim()];
@@ -163,10 +196,39 @@
             $.ajax("/api/friends", {
                 type: "POST",
                 data: newPatron
-            }).then(function() {
+            }).then(function (data) {
+
                 console.log("ok");
+                // data is an array with all objects
+                console.log(data);
+
+                //new patron is object just created
+                console.log(newPatron);
+
+                // this goes through each user one by one with new user at the end
+                var comparePats = [];
+                var comparisonScores = [];
+                var addArray = [];
+                data.forEach(pat => {
+                    if (!(pat.name === newPatron.name) && !(pat.photo === newPatron.photo)) {
+                        // comparePats.push(pat);
+                        for (var i = 0; i < data.length - 1; i++) {
+                            for (var x = 0; x < 10; x++) {
+                                addArray.push(newPatron.scores[x] - pat.scores[x]);
+
+                            }
+                            console.log(addArray);
+                            var sum = addArray.reduce(add, 0);
+                            comparisonScores.push(sum);
+                        }
+                    }
+                })
+                // console.log(comparePats);
+                console.log(comparisonScores);
+
+
             })
-        })
+        });
     </script>
 </body>
 
